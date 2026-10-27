@@ -5,10 +5,6 @@
 #game-toolbar{height:52px;flex-shrink:0;display:flex;align-items:center;gap:8px;max-width:920px;width:100%;margin:0 auto;padding:4px 12px;z-index:10}
 .game-name{font-size:14px;letter-spacing:1px;margin-right:auto;white-space:nowrap}.mode-label{display:flex}#control-mode{max-width:110px}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
 #playfield{position:relative;flex:1;min-height:0;margin:0 8px 8px}
-#music-panel{flex-shrink:0;text-align:center;position:relative;z-index:11;padding:0 8px 6px}
-#music-player{display:block;width:min(356px,100%);height:200px;border:0;margin:0 auto;background:#080e18}
-#music-panel p{margin:4px 0 0;font-size:11px;color:var(--gold);line-height:18px}
-#music-panel p span{color:var(--muted);margin-left:8px}
 canvas#canvas,canvas#canvas3d{position:fixed!important;inset:auto!important;left:var(--game-left)!important;top:var(--game-top)!important;transform:translate(-50%,-50%);width:var(--game-width)!important;height:var(--game-height)!important;margin:0!important;border:0!important;padding:0!important;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;image-rendering:pixelated;outline:none;visibility:hidden;z-index:2}
 body[data-ready="true"] canvas#canvas{visibility:visible!important;box-shadow:0 14px 56px #0007}
 #load-panel{position:fixed;z-index:8;left:var(--game-left);top:var(--game-top);transform:translate(-50%,-50%);width:min(88vw,390px);padding:28px 22px;text-align:center;background:#141e2c;border:1px solid #354b60;border-radius:14px;box-shadow:0 24px 80px #0006}
@@ -18,6 +14,5 @@ body[data-ready="true"] canvas#canvas{visibility:visible!important;box-shadow:0 
 #load-panel[data-load-state="slow"] #load-hint{color:var(--gold)}#load-panel[data-load-state="error"]{border-color:#ac6770}#load-panel[data-load-state="error"] #load-hint{color:#efadb5}#load-hint{overflow-wrap:anywhere}#retry-link{min-height:36px;padding:8px 10px}
 #transfer{display:none!important}#help-dialog{max-width:420px;width:calc(100vw - 32px);color:var(--text);background:#202b3b;border:1px solid #4a5e73;border-radius:14px;padding:26px;line-height:1.8;font-size:14px}#help-dialog::backdrop{background:#090f1bd9}#help-dialog h2{font-size:24px;line-height:1.4;margin:0 0 20px;color:var(--gold)}#close-help{width:100%;margin-top:12px}#web-message{position:fixed;z-index:20;bottom:calc(20px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);max-width:90vw;padding:10px 18px;background:#26394d;border:1px solid #63829a;border-radius:8px;font-size:13px;text-align:center}
 @media(max-width:370px){.game-name{font-size:12px;letter-spacing:0}#game-toolbar{padding:4px 8px;gap:5px}button,select{padding:6px 8px;font-size:12px}}
-@media(max-width:440px){.game-name{display:none}#game-toolbar{justify-content:center}#music-panel p span{display:none}}
-@media(min-width:700px){body[data-music-open="true"] #safe-frame{display:grid;grid-template-columns:minmax(0,1fr) 372px;grid-template-rows:52px minmax(0,1fr)}body[data-music-open="true"] #game-toolbar{grid-column:1/-1;grid-row:1}body[data-music-open="true"] #music-panel{grid-column:2;grid-row:2;align-self:center}body[data-music-open="true"] #playfield{grid-column:1;grid-row:2;min-width:0}}
+@media(max-width:440px){.game-name{display:none}#game-toolbar{justify-content:center}}
 @media(max-height:480px) and (orientation:landscape){#game-toolbar{height:44px}#load-panel{padding:12px 20px}.moon{display:none}.subtitle{margin-bottom:12px}h1{font-size:24px}}

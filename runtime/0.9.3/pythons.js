@@ -2221,6 +2221,22 @@ async function onload() {
 
 // TODO: error alert if 404 / timeout
     console.warn("Loading python interpreter from", config.executable)
+    // Night Survivors: finish verified, retryable downloads before Emscripten starts.
+    if (typeof window.nightSurvivorsPrepareRuntime !== "function") {
+        const detail = "runtime-loader.js must be loaded before pygbag starts";
+        if (typeof window.nightSurvivorsReportLoadError === "function")
+            window.nightSurvivorsReportLoadError("runtime", detail);
+        else
+            (window.nightSurvivorsLoadErrors ||= []).push({stage: "runtime", detail});
+        return;
+    }
+    try {
+        await window.nightSurvivorsPrepareRuntime(vm, config);
+    } catch (error) {
+        // The downloader already reported this failure in the page UI.
+        console.error("Runtime download stopped:", error);
+        return;
+    }
     jsimport(config.executable)
 }
 

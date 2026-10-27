@@ -1,5 +1,5 @@
 {
-  "created_at_utc": "2026-10-27T12:22:48.134548+00:00",
+  "created_at_utc": "2026-10-27T12:53:35.331279+00:00",
   "upstream_repository": "https://github.com/pygame-web/cdn",
   "upstream_commit": "3aa22420805e9b1603a6b950ffae45d6560fac09",
   "pygbag": "0.9.3",
@@ -82,8 +82,13 @@
       "upstream_git_blob_sha1": "63a0daa44112c605ce205fd427db1d90853894c4",
       "upstream_bytes": 69205,
       "upstream_sha256": "6da43e3e62c3db933421b99681e8ef99ed9b0ce1589ed8a0c69b88443278e019",
-      "bytes": 69205,
-      "sha256": "6da43e3e62c3db933421b99681e8ef99ed9b0ce1589ed8a0c69b88443278e019"
+      "transformation": "Preload verified data and WASM through the local runtime downloader.",
+      "patch": {
+        "before": "    jsimport(config.executable)",
+        "inserted_source": "    // Night Survivors: finish verified, retryable downloads before Emscripten starts.\n    if (typeof window.nightSurvivorsPrepareRuntime !== \"function\") {\n        const detail = \"runtime-loader.js must be loaded before pygbag starts\";\n        if (typeof window.nightSurvivorsReportLoadError === \"function\")\n            window.nightSurvivorsReportLoadError(\"runtime\", detail);\n        else\n            (window.nightSurvivorsLoadErrors ||= []).push({stage: \"runtime\", detail});\n        return;\n    }\n    try {\n        await window.nightSurvivorsPrepareRuntime(vm, config);\n    } catch (error) {\n        // The downloader already reported this failure in the page UI.\n        console.error(\"Runtime download stopped:\", error);\n        return;\n    }\n"
+      },
+      "bytes": 69952,
+      "sha256": "058f09c57348eeddb4502e1000146ec03236227964dd71e3208a8538773c196c"
     },
     {
       "path": "LICENSE",
@@ -104,6 +109,264 @@
       "upstream_sha256": "4f2caa3020592950565f3649c41e2eeacd001be93da892d60e5a4a43d893a323",
       "bytes": 1527290,
       "sha256": "4f2caa3020592950565f3649c41e2eeacd001be93da892d60e5a4a43d893a323"
+    },
+    {
+      "path": "downloads/79f70291224db8b81f523c75/main-data-000.bin",
+      "bytes": 262144,
+      "sha256": "86099028c1918baf40147263489dfd391155e6c422745eeee9444698ffc392c9",
+      "generated_by": "tools/build_runtime_chunks.py",
+      "source_runtime_path": "0.9.3/cpython312/main.data"
+    },
+    {
+      "path": "downloads/79f70291224db8b81f523c75/main-data-001.bin",
+      "bytes": 262144,
+      "sha256": "e8162f775d71ebbdca6eb2f5fb6c34f65731d588a90f18357cac4b042c88e993",
+      "generated_by": "tools/build_runtime_chunks.py",
+      "source_runtime_path": "0.9.3/cpython312/main.data"
+    },
+    {
+      "path": "downloads/79f70291224db8b81f523c75/main-data-002.bin",
+      "bytes": 262144,
+      "sha256": "7fd7eb51688d2927739d170e4e6935579dafa50ed23b826b96cc9793e4ceb539",
+      "generated_by": "tools/build_runtime_chunks.py",
+      "source_runtime_path": "0.9.3/cpython312/main.data"
+    },
+    {
+      "path": "downloads/79f70291224db8b81f523c75/main-data-003.bin",
+      "bytes": 262144,
+      "sha256": "fac7929cfe472840e4ce2d92016941c4be5471fe3ae50d1049f2f81eec4dcac4",
+      "generated_by": "tools/build_runtime_chunks.py",
+      "source_runtime_path": "0.9.3/cpython312/main.data"
+    },
+    {
+      "path": "downloads/79f70291224db8b81f523c75/main-data-004.bin",
+      "bytes": 262144,
+      "sha256": "f92d79b180614ed589deb3b8d52f1bbbd2b560c81e68abe409b85b9741126a37",
+      "generated_by": "tools/build_runtime_chunks.py",
+      "source_runtime_path": "0.9.3/cpython312/main.data"
+    },
+    {
+      "path": "downloads/79f70291224db8b81f523c75/main-data-005.bin",
+      "bytes": 262144,
+      "sha256": "0109d14c30a1cae262f5152a28f12257c5e429e40cb63e217eff026d78603ecf",
+      "generated_by": "tools/build_runtime_chunks.py",
+      "source_runtime_path": "0.9.3/cpython312/main.data"
+    },
+    {
+      "path": "downloads/79f70291224db8b81f523c75/main-data-006.bin",
+      "bytes": 262144,
+      "sha256": "1bf2c77a20206ec268f7a05b55951d53d9c8f48370c79ce497af7a7037ff7fc3",
+      "generated_by": "tools/build_runtime_chunks.py",
+      "source_runtime_path": "0.9.3/cpython312/main.data"
+    },
+    {
+      "path": "downloads/79f70291224db8b81f523c75/main-data-007.bin",
+      "bytes": 262144,
+      "sha256": "f0d60c963863d3594e8045e83d0f52b2b88a2d774a70d6e4637b3f1ecb00256b",
+      "generated_by": "tools/build_runtime_chunks.py",
+      "source_runtime_path": "0.9.3/cpython312/main.data"
+    },
+    {
+      "path": "downloads/79f70291224db8b81f523c75/main-data-008.bin",
+      "bytes": 262144,
+      "sha256": "9992831fcb5d0baee150371e6e82809cc11b8ddbfe8d0e353d2a58d6d64bd1ae",
+      "generated_by": "tools/build_runtime_chunks.py",
+      "source_runtime_path": "0.9.3/cpython312/main.data"
+    },
+    {
+      "path": "downloads/79f70291224db8b81f523c75/main-data-009.bin",
+      "bytes": 262144,
+      "sha256": "f535cbe0616c4383c059895120a4b619e3245470326f187c915ca4efc0094761",
+      "generated_by": "tools/build_runtime_chunks.py",
+      "source_runtime_path": "0.9.3/cpython312/main.data"
+    },
+    {
+      "path": "downloads/79f70291224db8b81f523c75/main-data-010.bin",
+      "bytes": 262144,
+      "sha256": "c0d6d17169ec7806db42ccca34b583bf7828f549167360e1adaca8b116efd9ed",
+      "generated_by": "tools/build_runtime_chunks.py",
+      "source_runtime_path": "0.9.3/cpython312/main.data"
+    },
+    {
+      "path": "downloads/79f70291224db8b81f523c75/main-data-011.bin",
+      "bytes": 262144,
+      "sha256": "4294469bec126118c227041ba6a543c66d793e463af6eebe70880c1708874c52",
+      "generated_by": "tools/build_runtime_chunks.py",
+      "source_runtime_path": "0.9.3/cpython312/main.data"
+    },
+    {
+      "path": "downloads/79f70291224db8b81f523c75/main-data-012.bin",
+      "bytes": 262144,
+      "sha256": "f18d4d007bd895a950cb235a77eb267f2fba20a18ecd718c1b9efbffabd1e774",
+      "generated_by": "tools/build_runtime_chunks.py",
+      "source_runtime_path": "0.9.3/cpython312/main.data"
+    },
+    {
+      "path": "downloads/79f70291224db8b81f523c75/main-data-013.bin",
+      "bytes": 262144,
+      "sha256": "f3f6f4a83f2b880ef08f19e79758d840b1add53039392465a7b341f60dae1635",
+      "generated_by": "tools/build_runtime_chunks.py",
+      "source_runtime_path": "0.9.3/cpython312/main.data"
+    },
+    {
+      "path": "downloads/79f70291224db8b81f523c75/main-data-014.bin",
+      "bytes": 262144,
+      "sha256": "103994a0912cc1124664cf26fd60048cf798505d1ef8d5571f9854e80fb0bf2e",
+      "generated_by": "tools/build_runtime_chunks.py",
+      "source_runtime_path": "0.9.3/cpython312/main.data"
+    },
+    {
+      "path": "downloads/79f70291224db8b81f523c75/main-data-015.bin",
+      "bytes": 262144,
+      "sha256": "7590c09fd873b62e08ded4f889c7fe7179d31687160e759cecaf0e71162bde89",
+      "generated_by": "tools/build_runtime_chunks.py",
+      "source_runtime_path": "0.9.3/cpython312/main.data"
+    },
+    {
+      "path": "downloads/79f70291224db8b81f523c75/main-data-016.bin",
+      "bytes": 262144,
+      "sha256": "6990e01fe765c171e5172da12eebc3589d6bac73dab895d4f538b627cfc19737",
+      "generated_by": "tools/build_runtime_chunks.py",
+      "source_runtime_path": "0.9.3/cpython312/main.data"
+    },
+    {
+      "path": "downloads/79f70291224db8b81f523c75/main-data-017.bin",
+      "bytes": 46293,
+      "sha256": "7fd654332853029826eb4febc70ba7fac070506875450d8a9f2cdd5c1d7a5e73",
+      "generated_by": "tools/build_runtime_chunks.py",
+      "source_runtime_path": "0.9.3/cpython312/main.data"
+    },
+    {
+      "path": "downloads/79f70291224db8b81f523c75/main-wasm-000.bin",
+      "bytes": 262144,
+      "sha256": "743db30f643f571a5dbb1059dd551c2bb179a0683f6fb03a6ae7c4c2caaba017",
+      "generated_by": "tools/build_runtime_chunks.py",
+      "source_runtime_path": "0.9.3/cpython312/main.wasm"
+    },
+    {
+      "path": "downloads/79f70291224db8b81f523c75/main-wasm-001.bin",
+      "bytes": 262144,
+      "sha256": "1973a31802cddfb73fee7febc073d9df59b54f022d302f6e8fcf964791c0c095",
+      "generated_by": "tools/build_runtime_chunks.py",
+      "source_runtime_path": "0.9.3/cpython312/main.wasm"
+    },
+    {
+      "path": "downloads/79f70291224db8b81f523c75/main-wasm-002.bin",
+      "bytes": 262144,
+      "sha256": "dea40420919f3b3687147e8e6f0e398b14d1d274d51c7fa206de022ebf25c5b2",
+      "generated_by": "tools/build_runtime_chunks.py",
+      "source_runtime_path": "0.9.3/cpython312/main.wasm"
+    },
+    {
+      "path": "downloads/79f70291224db8b81f523c75/main-wasm-003.bin",
+      "bytes": 262144,
+      "sha256": "4d237836386e7e36873d9c7c83bcfdc074c4054434d75a26da6e5f91e455e551",
+      "generated_by": "tools/build_runtime_chunks.py",
+      "source_runtime_path": "0.9.3/cpython312/main.wasm"
+    },
+    {
+      "path": "downloads/79f70291224db8b81f523c75/main-wasm-004.bin",
+      "bytes": 262144,
+      "sha256": "52edb45025cd17fc3d141a83675a008993501e976c5fe1c794fc156cb45c1fe9",
+      "generated_by": "tools/build_runtime_chunks.py",
+      "source_runtime_path": "0.9.3/cpython312/main.wasm"
+    },
+    {
+      "path": "downloads/79f70291224db8b81f523c75/main-wasm-005.bin",
+      "bytes": 262144,
+      "sha256": "3da85e55abef068f67a04b5df308e37b11ce8b331a3bbb59dc8d2c3fa610e8bc",
+      "generated_by": "tools/build_runtime_chunks.py",
+      "source_runtime_path": "0.9.3/cpython312/main.wasm"
+    },
+    {
+      "path": "downloads/79f70291224db8b81f523c75/main-wasm-006.bin",
+      "bytes": 262144,
+      "sha256": "b3f6bfb711ce011d430dcf1d7ddb65d2c74e9d3db8305d10588e2f4745e24643",
+      "generated_by": "tools/build_runtime_chunks.py",
+      "source_runtime_path": "0.9.3/cpython312/main.wasm"
+    },
+    {
+      "path": "downloads/79f70291224db8b81f523c75/main-wasm-007.bin",
+      "bytes": 262144,
+      "sha256": "ac0e2720d4874569e70f956376431c4be781d0901337b16852afc6bfdb877539",
+      "generated_by": "tools/build_runtime_chunks.py",
+      "source_runtime_path": "0.9.3/cpython312/main.wasm"
+    },
+    {
+      "path": "downloads/79f70291224db8b81f523c75/main-wasm-008.bin",
+      "bytes": 262144,
+      "sha256": "79cbe34a50da2fe8d51f37ac3b4750bd2d7fced3b5a2f5859521ed18380bfa33",
+      "generated_by": "tools/build_runtime_chunks.py",
+      "source_runtime_path": "0.9.3/cpython312/main.wasm"
+    },
+    {
+      "path": "downloads/79f70291224db8b81f523c75/main-wasm-009.bin",
+      "bytes": 262144,
+      "sha256": "6f8581cb815b2f81221ff10582775301d3e6bdf8efdc99b0f18e251399b82d72",
+      "generated_by": "tools/build_runtime_chunks.py",
+      "source_runtime_path": "0.9.3/cpython312/main.wasm"
+    },
+    {
+      "path": "downloads/79f70291224db8b81f523c75/main-wasm-010.bin",
+      "bytes": 262144,
+      "sha256": "b88a28e2ee76655a4d89bff4cc86fa00af0570ec2ad578da1031a319e074f9d4",
+      "generated_by": "tools/build_runtime_chunks.py",
+      "source_runtime_path": "0.9.3/cpython312/main.wasm"
+    },
+    {
+      "path": "downloads/79f70291224db8b81f523c75/main-wasm-011.bin",
+      "bytes": 262144,
+      "sha256": "8aa18ac2ee2c96151dc6b9383614babd7415dca6242ee60163baf177a28ea0f2",
+      "generated_by": "tools/build_runtime_chunks.py",
+      "source_runtime_path": "0.9.3/cpython312/main.wasm"
+    },
+    {
+      "path": "downloads/79f70291224db8b81f523c75/main-wasm-012.bin",
+      "bytes": 262144,
+      "sha256": "75f35e99a5d7255a51496d9215ccdf0d9aea67ae8dcd2db00ed32591cf2b5595",
+      "generated_by": "tools/build_runtime_chunks.py",
+      "source_runtime_path": "0.9.3/cpython312/main.wasm"
+    },
+    {
+      "path": "downloads/79f70291224db8b81f523c75/main-wasm-013.bin",
+      "bytes": 262144,
+      "sha256": "82d9bb6f4edd9ad55e097393fc74173119432c1331ac32b5d69b1be3c37feb44",
+      "generated_by": "tools/build_runtime_chunks.py",
+      "source_runtime_path": "0.9.3/cpython312/main.wasm"
+    },
+    {
+      "path": "downloads/79f70291224db8b81f523c75/main-wasm-014.bin",
+      "bytes": 262144,
+      "sha256": "fc8c77a5d6a1beb0951e0c7a9bba1fd99ca673aed969e9019ed68d426b8dac46",
+      "generated_by": "tools/build_runtime_chunks.py",
+      "source_runtime_path": "0.9.3/cpython312/main.wasm"
+    },
+    {
+      "path": "downloads/79f70291224db8b81f523c75/main-wasm-015.bin",
+      "bytes": 262144,
+      "sha256": "ade1b1636b62745a93d78d95778e84d4c6968b970b13b023e30ee66c99c8703f",
+      "generated_by": "tools/build_runtime_chunks.py",
+      "source_runtime_path": "0.9.3/cpython312/main.wasm"
+    },
+    {
+      "path": "downloads/79f70291224db8b81f523c75/main-wasm-016.bin",
+      "bytes": 262144,
+      "sha256": "7532b5bd6b0f1d88f7c81b2d4667de8163f92f3726a91124c7b2fab977705eb4",
+      "generated_by": "tools/build_runtime_chunks.py",
+      "source_runtime_path": "0.9.3/cpython312/main.wasm"
+    },
+    {
+      "path": "downloads/79f70291224db8b81f523c75/main-wasm-017.bin",
+      "bytes": 82376,
+      "sha256": "c56e77a900a8bc0e44dc7d1b6ab104b017ba957bd5a4ab663a321ab67c7eea55",
+      "generated_by": "tools/build_runtime_chunks.py",
+      "source_runtime_path": "0.9.3/cpython312/main.wasm"
+    },
+    {
+      "path": "downloads/manifest.json",
+      "bytes": 8289,
+      "sha256": "998bda2c9de44344277d69e563a98e9e2c04e1374e692870a4910f436d7024f0",
+      "generated_by": "tools/build_runtime_chunks.py"
     },
     {
       "path": "index-0.9.3-cp312.json",

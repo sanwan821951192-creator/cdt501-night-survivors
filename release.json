@@ -1,17 +1,34 @@
 {
-  "version": "2026-10-27-self-contained-runtime",
+  "version": "2026-10-27-retryable-runtime",
   "same_origin_runtime": true,
-  "runtime_manifest_sha256": "fea50f2523d5c120593d7d2712fce443190eb17995d1de2d673bc61e723441b4",
-  "game_archive_bytes": 168083,
+  "runtime_manifest_sha256": "344c6dd39edd911a5912807ec7408d4ebb2706f951facd00887a74cc5da43161",
+  "runtime_download": {
+    "delivery": "same-origin-gzip-chunks",
+    "manifest": "runtime/downloads/manifest.json",
+    "manifest_sha256": "998bda2c9de44344277d69e563a98e9e2c04e1374e692870a4910f436d7024f0",
+    "version": "79f70291224db8b81f523c75",
+    "chunk_bytes": 262144,
+    "chunk_count": 36,
+    "compressed_bytes": 9041565,
+    "files": [
+      "0.9.3/cpython312/main.data",
+      "0.9.3/cpython312/main.wasm"
+    ],
+    "integrity": "SHA256 for each chunk, compressed file and decompressed file",
+    "progress": "downloaded bytes, total bytes and retry status",
+    "automatic_retries": true,
+    "manual_retry": "reload page",
+    "cache": "reuse verified chunks from CacheStorage when available",
+    "fallback": "verified original files when streaming decompression is unavailable"
+  },
+  "game_archive_bytes": 168263,
   "music": {
-    "title": "小熊饼干（纯音乐）",
-    "artist": "BlackDD",
-    "source": "https://www.youtube.com/watch?v=NhTxeM3-hB8",
-    "delivery": "visible official embed"
+    "source": null,
+    "status": "pending"
   },
   "endless_after_seconds": 120,
   "joystick_position": "bottom-right",
   "input_mode": "auto",
   "upgrade_invulnerability_seconds": 1.0,
-  "game_archive_sha256": "7c1ba60a07af05e1f384ddb750be21c20973862bc0d8dcd8495c1ee0746cfd5f"
+  "game_archive_sha256": "fac554334e2214c2f6d64ba5f68543542134765a78371b890956e3fc4a986cfa"
 }
