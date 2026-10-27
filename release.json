@@ -1,0 +1,7 @@
+{
+  "version": "2026-10-27-shield-right-joystick-auto",
+  "joystick_position": "bottom-right",
+  "input_mode": "auto",
+  "upgrade_invulnerability_seconds": 1.0,
+  "game_archive_sha256": "1306ecd2ecb6c7874c68ed907458a9b5ee79773ff89549b561413df87a09e00c"
+}
