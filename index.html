@@ -39,12 +39,12 @@ async def custom_site():
     # unpack filesystem from compressed archive into work dir
     if platform.window.location.host.find('.itch.zone')>0:
         import zipfile
-        async with platform.fopen("night-survivors.apk", "rb") as archive:
+        async with platform.fopen("night-survivors.apk?v=8623688aeb1dea0d", "rb") as archive:
             with zipfile.ZipFile(archive) as zip_ref:
                 zip_ref.extractall(appdir.as_posix())
     else:
         import tarfile
-        async with platform.fopen("night-survivors.tar.gz", "rb") as archive:
+        async with platform.fopen("night-survivors.tar.gz?v=c94e01e6613ab34a", "rb") as archive:
             tar = tarfile.open(fileobj=archive, mode="r:gz")
             tar.extractall(path=appdir.as_posix(), filter='tar')
             tar.close()
@@ -308,8 +308,8 @@ function show_infobox() {
 
     <script src="https://pygame-web.github.io/cdn/0.9.3//browserfs.min.js"></script>
 
-    <link rel="stylesheet" href="web.css">
-    <script src="web.js" defer></script>
+    <link rel="stylesheet" href="web.css?v=7376061796c64713">
+    <script src="web.js?v=bf9c0609b1844f0f" defer></script>
 </head>
 
 <body>
@@ -317,9 +317,14 @@ function show_infobox() {
         <nav id="game-toolbar" aria-label="游戏设置">
             <span class="game-name">夜幕幸存者</span>
             <label class="mode-label"><span class="sr-only">操作方式</span><select id="control-mode" aria-label="操作方式"><option value="auto">自动识别</option><option value="touch">触屏摇杆</option><option value="desktop">键盘鼠标</option></select></label>
+            <button id="music-button" type="button" aria-expanded="false" aria-controls="music-panel">音乐</button>
             <button id="help-button" type="button">玩法</button>
             <button id="fullscreen-button" type="button">全屏</button>
         </nav>
+        <section id="music-panel" aria-label="小熊饼干背景音乐" hidden>
+            <iframe id="music-player" title="BlackDD 小熊饼干（纯音乐）官方播放器" width="356" height="200" allow="autoplay; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+            <p>小熊饼干 · 纯音乐 <span>点击播放器播放，关闭音乐恢复大画面</span></p>
+        </section>
         <div id="playfield" aria-label="游戏画面区域"></div>
     </div>
 
@@ -356,9 +361,11 @@ height="700px"
     </section>
     <dialog id="help-dialog">
         <h2>活到黎明</h2>
-        <p>生存 120 秒。武器自动攻击，靠近水晶收集经验，每次升级选择一张成长卡。</p>
+        <p>先生存 120 秒，随后自动进入无尽模式。武器与被动技能可以持续升级，每 30 秒敌人变强，Boss 会周期性出现。</p>
+        <p>武器自动攻击，靠近水晶收集经验，升级时选择一张成长卡。选卡后有 1 秒无敌保护。</p>
         <p><strong>手机：</strong>右下半透明摇杆控制方向，松手停止。点击右上角暂停。</p>
-        <p><strong>电脑：</strong>鼠标指向移动，或按 WASD / 方向键。P 暂停，M 开关声音，数字 1–3 选卡。</p>
+        <p><strong>电脑：</strong>鼠标指向移动，或按 WASD / 方向键。P 暂停，M 开关音效，数字 1–3 选卡。</p>
+        <p><strong>音乐：</strong>顶部“音乐”打开《小熊饼干》官方播放器。点击播放后循环播放，音量由播放器控制。</p>
         <p>触屏电脑可在顶部切换操作方式。切到后台会暂停，回来后点击“继续生存”。</p>
         <button id="close-help" type="button">知道了</button>
     </dialog>

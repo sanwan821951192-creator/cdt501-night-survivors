@@ -1,7 +1,14 @@
 {
-  "version": "2026-10-27-shield-right-joystick-auto",
+  "version": "2026-10-27-endless-shield-right-auto-music",
+  "music": {
+    "title": "小熊饼干（纯音乐）",
+    "artist": "BlackDD",
+    "source": "https://www.youtube.com/watch?v=NhTxeM3-hB8",
+    "delivery": "visible official embed"
+  },
+  "endless_after_seconds": 120,
   "joystick_position": "bottom-right",
   "input_mode": "auto",
   "upgrade_invulnerability_seconds": 1.0,
-  "game_archive_sha256": "1306ecd2ecb6c7874c68ed907458a9b5ee79773ff89549b561413df87a09e00c"
+  "game_archive_sha256": "c94e01e6613ab34acdc0bfa7c3b857350796165bfa6c629436a83998bc3a7841"
 }

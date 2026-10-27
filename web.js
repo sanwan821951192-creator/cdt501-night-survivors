@@ -5,6 +5,22 @@ if(['auto','touch','desktop'].includes(params.get('mode'))) control.mode=params.
 const mode=document.getElementById('control-mode');mode.value=control.mode;
 const canvas=document.getElementById('canvas');
 const requestPause=()=>{control.pauseRequested=true;};
+const musicButton=document.getElementById('music-button');
+const musicPanel=document.getElementById('music-panel');
+const musicPlayer=document.getElementById('music-player');
+musicButton.addEventListener('click',()=>{
+  const opening=musicPanel.hidden;
+  requestPause();
+  musicPanel.hidden=!opening;
+  document.body.dataset.musicOpen=String(opening);
+  musicButton.setAttribute('aria-expanded',String(opening));
+  musicButton.textContent=opening?'关音乐':'音乐';
+  musicPlayer.src=opening?'https://www.youtube.com/embed/NhTxeM3-hB8?autoplay=1&loop=1&playlist=NhTxeM3-hB8&playsinline=1&rel=0&enablejsapi=1&origin='+encodeURIComponent(location.origin):'about:blank';
+  fitGame();
+});
+document.addEventListener('visibilitychange',()=>{
+  if(document.hidden&&!musicPanel.hidden)musicPlayer.contentWindow?.postMessage(JSON.stringify({event:'command',func:'pauseVideo',args:[]}),'https://www.youtube.com');
+});
 function fitGame(){
   const r=document.getElementById('playfield').getBoundingClientRect();
   const scale=Math.max(.1,Math.min(r.width/390,r.height/700,1.35));
