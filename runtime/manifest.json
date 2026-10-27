@@ -1,0 +1,397 @@
+{
+  "created_at_utc": "2026-10-27T12:22:48.134548+00:00",
+  "upstream_repository": "https://github.com/pygame-web/cdn",
+  "upstream_commit": "3aa22420805e9b1603a6b950ffae45d6560fac09",
+  "pygbag": "0.9.3",
+  "python_abi": "cp312",
+  "pygame": "2.5.7",
+  "bootstrap": {
+    "cdn": "./runtime/0.9.3/",
+    "PYGPI": "./runtime/"
+  },
+  "files": [
+    {
+      "path": "0.9.3/cpython312/main.data",
+      "source_url": "https://raw.githubusercontent.com/pygame-web/cdn/3aa22420805e9b1603a6b950ffae45d6560fac09/0.9.3/cpython312/main.data",
+      "source_commit": "3aa22420805e9b1603a6b950ffae45d6560fac09",
+      "upstream_git_blob_sha1": "2293dbb2d36f9609f7411a25cb5c032c3a42dea4",
+      "upstream_bytes": 6668609,
+      "upstream_sha256": "b068df4d59b06b113cfc3c4d6419bdf699d2c2eeb547c9119e2044c98cdc4a59",
+      "bytes": 6668609,
+      "sha256": "b068df4d59b06b113cfc3c4d6419bdf699d2c2eeb547c9119e2044c98cdc4a59"
+    },
+    {
+      "path": "0.9.3/cpython312/main.js",
+      "source_url": "https://raw.githubusercontent.com/pygame-web/cdn/3aa22420805e9b1603a6b950ffae45d6560fac09/0.9.3/cpython312/main.js",
+      "source_commit": "3aa22420805e9b1603a6b950ffae45d6560fac09",
+      "upstream_git_blob_sha1": "22423de914b82b94129a2f0f4f5e9c70f1485aad",
+      "upstream_bytes": 849985,
+      "upstream_sha256": "01c4e4dc7145a482ad259d8272ce73d97b58ec2a141bfb57e620347730d159c7",
+      "bytes": 849985,
+      "sha256": "01c4e4dc7145a482ad259d8272ce73d97b58ec2a141bfb57e620347730d159c7"
+    },
+    {
+      "path": "0.9.3/cpython312/main.wasm",
+      "source_url": "https://raw.githubusercontent.com/pygame-web/cdn/3aa22420805e9b1603a6b950ffae45d6560fac09/0.9.3/cpython312/main.wasm",
+      "source_commit": "3aa22420805e9b1603a6b950ffae45d6560fac09",
+      "upstream_git_blob_sha1": "ca460bb234eef1738b05f5f81bdd8ec52caafdde",
+      "upstream_bytes": 13447111,
+      "upstream_sha256": "3cfb882de90feeb367325f0c58731932880c8f424fb5a670b98d035ae862b280",
+      "bytes": 13447111,
+      "sha256": "3cfb882de90feeb367325f0c58731932880c8f424fb5a670b98d035ae862b280"
+    },
+    {
+      "path": "0.9.3/cpythonrc.py",
+      "source_url": "https://raw.githubusercontent.com/pygame-web/cdn/3aa22420805e9b1603a6b950ffae45d6560fac09/0.9.3/cpythonrc.py",
+      "source_commit": "3aa22420805e9b1603a6b950ffae45d6560fac09",
+      "upstream_git_blob_sha1": "0b9f0707e5852410fb58b53a74b793e7bea3a25c",
+      "upstream_bytes": 50426,
+      "upstream_sha256": "b8a0b8168b58ef7c38c17d4705c9cbe1751fa667a0a6d26ed26f0537134735de",
+      "transformation": "Set same-origin PYGPI before import_site preloads the embedded template.",
+      "patch": {
+        "after": "import __EMSCRIPTEN__ as platform",
+        "inserted_source": "# Night Survivors: set the package root before import_site preloads the\n# embedded HTML bootstrap. Setting PYGPI in that bootstrap is already too late.\nif not aio.cross.simulator:\n    _night_runtime_cdn = str(platform.window.config.cdn)\n    if not _night_runtime_cdn.endswith(\"/0.9.3/\"):\n        raise RuntimeError(\"Expected the vendored pygbag 0.9.3 runtime URL\")\n    os.environ[\"PYGPI\"] = _night_runtime_cdn[:-len(\"0.9.3/\")]\n    del _night_runtime_cdn\n"
+      },
+      "bytes": 50882,
+      "sha256": "c5c58db22ad7b61fb75e4cd101c11e5ea5592f0fd9c475bd4e80a95050e27e9d"
+    },
+    {
+      "path": "0.9.3/empty.html",
+      "source_url": "https://raw.githubusercontent.com/pygame-web/cdn/3aa22420805e9b1603a6b950ffae45d6560fac09/0.9.3/empty.html",
+      "source_commit": "3aa22420805e9b1603a6b950ffae45d6560fac09",
+      "upstream_git_blob_sha1": "18ecdcb795c33d6ab7bbb43f647947defca5634d",
+      "upstream_bytes": 14,
+      "upstream_sha256": "b0693dc92f76e08bf1485b3dd9b514a2e31dfd6f39422a6b60edb722671dc98f",
+      "bytes": 14,
+      "sha256": "b0693dc92f76e08bf1485b3dd9b514a2e31dfd6f39422a6b60edb722671dc98f"
+    },
+    {
+      "path": "0.9.3/empty.ogg",
+      "source_url": "https://raw.githubusercontent.com/pygame-web/cdn/3aa22420805e9b1603a6b950ffae45d6560fac09/0.9.3/empty.ogg",
+      "source_commit": "3aa22420805e9b1603a6b950ffae45d6560fac09",
+      "upstream_git_blob_sha1": "4a7a0b5c4b6af6d4573f4969f15eb59fdf1f2be3",
+      "upstream_bytes": 4035,
+      "upstream_sha256": "884c20d864222b845aa78fb078ec370f4ddaa203cd92ace28440ed7733403b40",
+      "bytes": 4035,
+      "sha256": "884c20d864222b845aa78fb078ec370f4ddaa203cd92ace28440ed7733403b40"
+    },
+    {
+      "path": "0.9.3/pythons.js",
+      "source_url": "https://raw.githubusercontent.com/pygame-web/cdn/3aa22420805e9b1603a6b950ffae45d6560fac09/0.9.3/pythons.js",
+      "source_commit": "3aa22420805e9b1603a6b950ffae45d6560fac09",
+      "upstream_git_blob_sha1": "63a0daa44112c605ce205fd427db1d90853894c4",
+      "upstream_bytes": 69205,
+      "upstream_sha256": "6da43e3e62c3db933421b99681e8ef99ed9b0ce1589ed8a0c69b88443278e019",
+      "bytes": 69205,
+      "sha256": "6da43e3e62c3db933421b99681e8ef99ed9b0ce1589ed8a0c69b88443278e019"
+    },
+    {
+      "path": "LICENSE",
+      "source_url": "https://raw.githubusercontent.com/pygame-web/cdn/3aa22420805e9b1603a6b950ffae45d6560fac09/LICENSE",
+      "source_commit": "3aa22420805e9b1603a6b950ffae45d6560fac09",
+      "upstream_git_blob_sha1": "d436517e2a822012d997f8098e68247fb0ef465a",
+      "upstream_bytes": 1068,
+      "upstream_sha256": "8765092de35f62063ae9220e4ef2df987a84c0314d988880d82e6f781bac0b31",
+      "bytes": 1068,
+      "sha256": "8765092de35f62063ae9220e4ef2df987a84c0314d988880d82e6f781bac0b31"
+    },
+    {
+      "path": "cp312/pygame_ce-2.5.7-cp312-cp312-wasm32_bi_emscripten.whl",
+      "source_url": "https://raw.githubusercontent.com/pygame-web/cdn/3aa22420805e9b1603a6b950ffae45d6560fac09/cp312/pygame_ce-2.5.7-cp312-cp312-wasm32_bi_emscripten.whl",
+      "source_commit": "3aa22420805e9b1603a6b950ffae45d6560fac09",
+      "upstream_git_blob_sha1": "5d003218d148ef1c839e742664b276a8688b6a80",
+      "upstream_bytes": 1527290,
+      "upstream_sha256": "4f2caa3020592950565f3649c41e2eeacd001be93da892d60e5a4a43d893a323",
+      "bytes": 1527290,
+      "sha256": "4f2caa3020592950565f3649c41e2eeacd001be93da892d60e5a4a43d893a323"
+    },
+    {
+      "path": "index-0.9.3-cp312.json",
+      "source_url": "https://raw.githubusercontent.com/pygame-web/cdn/3aa22420805e9b1603a6b950ffae45d6560fac09/index-0.9.3-cp312.json",
+      "source_commit": "3aa22420805e9b1603a6b950ffae45d6560fac09",
+      "upstream_git_blob_sha1": "b9d3190b9a7a52551a9d9c09137b0bf584fbc481",
+      "upstream_bytes": 1451,
+      "upstream_sha256": "ec6edacc1b95700c99b8daecb8ce3949e58e96a1da5234c81d8a0071aa537213",
+      "transformation": "Keep pygame only; use a same-origin default CDN.",
+      "bytes": 87,
+      "sha256": "70961b37af9455b3b8bfc0105b420395f80d3829be458e27d66d5d048589e892"
+    },
+    {
+      "path": "licenses/CPython-3.12-LICENSE.txt",
+      "source_url": "https://raw.githubusercontent.com/python/cpython/0fb18b02c8ad56299d6a2910be0bab8ad601ef24/LICENSE",
+      "source_commit": "0fb18b02c8ad56299d6a2910be0bab8ad601ef24",
+      "upstream_git_blob_sha1": "f26bcf4d2de6eb136e31006ca3ab447d5e488adf",
+      "upstream_bytes": 13936,
+      "upstream_sha256": "3b2f81fe21d181c499c59a256c8e1968455d6689d269aa85373bfb6af41da3bf",
+      "bytes": 13936,
+      "sha256": "3b2f81fe21d181c499c59a256c8e1968455d6689d269aa85373bfb6af41da3bf"
+    },
+    {
+      "path": "licenses/pygame-ce/LGPL.txt",
+      "source_url": "https://raw.githubusercontent.com/pygame-community/pygame-ce/2895f7aed85ca8fdff2704c42b286cefcf6a6344/docs/LGPL.txt",
+      "source_commit": "2895f7aed85ca8fdff2704c42b286cefcf6a6344",
+      "upstream_git_blob_sha1": "b1e3f5a2638797271cbc9b91b856c05ed6942c8f",
+      "upstream_bytes": 26430,
+      "upstream_sha256": "a190dc9c8043755d90f8b0a75fa66b9e42d4af4c980bf5ddc633f0124db3cee7",
+      "bytes": 26430,
+      "sha256": "a190dc9c8043755d90f8b0a75fa66b9e42d4af4c980bf5ddc633f0124db3cee7"
+    },
+    {
+      "path": "licenses/pygame-ce/METADATA",
+      "bytes": 11691,
+      "sha256": "1d1dd0f147a85915589f34ed0857b3ae7343bc21ca39f837f0addded57eec9e2",
+      "extracted_from": "cp312/pygame_ce-2.5.7-cp312-cp312-wasm32_bi_emscripten.whl",
+      "archive_member": "pygame_ce-2.5.7.dist-info/METADATA"
+    },
+    {
+      "path": "licenses/pygame-ce/dependencies/LICENSE.FLAC.txt",
+      "source_url": "https://raw.githubusercontent.com/pygame-community/pygame-ce/2895f7aed85ca8fdff2704c42b286cefcf6a6344/docs/licenses/LICENSE.FLAC.txt",
+      "source_commit": "2895f7aed85ca8fdff2704c42b286cefcf6a6344",
+      "upstream_git_blob_sha1": "14fdf26edb1a21588233bbf5e1a456f6b8572d5b",
+      "upstream_bytes": 1522,
+      "upstream_sha256": "349b7bdbf2de10e1303fc3e8aa81f944fd2832fe40270e1b805e20b1b131187c",
+      "bytes": 1522,
+      "sha256": "349b7bdbf2de10e1303fc3e8aa81f944fd2832fe40270e1b805e20b1b131187c"
+    },
+    {
+      "path": "licenses/pygame-ce/dependencies/LICENSE.fluidsynth.txt",
+      "source_url": "https://raw.githubusercontent.com/pygame-community/pygame-ce/2895f7aed85ca8fdff2704c42b286cefcf6a6344/docs/licenses/LICENSE.fluidsynth.txt",
+      "source_commit": "2895f7aed85ca8fdff2704c42b286cefcf6a6344",
+      "upstream_git_blob_sha1": "19e307187ac8b9abc086be686dc81b0f09523ef1",
+      "upstream_bytes": 26461,
+      "upstream_sha256": "9b872a8a070b8ad329c4bd380fb1bf0000f564c75023ec8e1e6803f15364b9e9",
+      "bytes": 26461,
+      "sha256": "9b872a8a070b8ad329c4bd380fb1bf0000f564c75023ec8e1e6803f15364b9e9"
+    },
+    {
+      "path": "licenses/pygame-ce/dependencies/LICENSE.freetype.txt",
+      "source_url": "https://raw.githubusercontent.com/pygame-community/pygame-ce/2895f7aed85ca8fdff2704c42b286cefcf6a6344/docs/licenses/LICENSE.freetype.txt",
+      "source_commit": "2895f7aed85ca8fdff2704c42b286cefcf6a6344",
+      "upstream_git_blob_sha1": "52a33bddb733ac0864154a05cfa7b72acbd031b9",
+      "upstream_bytes": 6912,
+      "upstream_sha256": "650737ec7589c35600de73b0db88dafb314f7e32e7e3cf38d0c87ceb1a7ed31b",
+      "bytes": 6912,
+      "sha256": "650737ec7589c35600de73b0db88dafb314f7e32e7e3cf38d0c87ceb1a7ed31b"
+    },
+    {
+      "path": "licenses/pygame-ce/dependencies/LICENSE.jpeg.txt",
+      "source_url": "https://raw.githubusercontent.com/pygame-community/pygame-ce/2895f7aed85ca8fdff2704c42b286cefcf6a6344/docs/licenses/LICENSE.jpeg.txt",
+      "source_commit": "2895f7aed85ca8fdff2704c42b286cefcf6a6344",
+      "upstream_git_blob_sha1": "179cf4d7462ee52a3101f1681a20efa8b1af8fe5",
+      "upstream_bytes": 3021,
+      "upstream_sha256": "2899a194cc43af0cfbeff33cdecfad20de8bbf784155b0cd0217d27c37609a28",
+      "bytes": 3021,
+      "sha256": "2899a194cc43af0cfbeff33cdecfad20de8bbf784155b0cd0217d27c37609a28"
+    },
+    {
+      "path": "licenses/pygame-ce/dependencies/LICENSE.modplug.txt",
+      "source_url": "https://raw.githubusercontent.com/pygame-community/pygame-ce/2895f7aed85ca8fdff2704c42b286cefcf6a6344/docs/licenses/LICENSE.modplug.txt",
+      "source_commit": "2895f7aed85ca8fdff2704c42b286cefcf6a6344",
+      "upstream_git_blob_sha1": "4167b3fc454e01c2e30dc3cacd69e91e54806d0c",
+      "upstream_bytes": 59,
+      "upstream_sha256": "b64d05522976d26e870bfbbf701e5a89cc5e2ab8fbde677e24f07ddaf0dac7c1",
+      "bytes": 59,
+      "sha256": "b64d05522976d26e870bfbbf701e5a89cc5e2ab8fbde677e24f07ddaf0dac7c1"
+    },
+    {
+      "path": "licenses/pygame-ce/dependencies/LICENSE.mpg123.txt",
+      "source_url": "https://raw.githubusercontent.com/pygame-community/pygame-ce/2895f7aed85ca8fdff2704c42b286cefcf6a6344/docs/licenses/LICENSE.mpg123.txt",
+      "source_commit": "2895f7aed85ca8fdff2704c42b286cefcf6a6344",
+      "upstream_git_blob_sha1": "6d323e1476e17f2604a0b005858681d95f1b4712",
+      "upstream_bytes": 41488,
+      "upstream_sha256": "892cd7e1c0b23374c8a82c244f64c30297c1feada0143cfdd9f6a25f445b0dd6",
+      "bytes": 41488,
+      "sha256": "892cd7e1c0b23374c8a82c244f64c30297c1feada0143cfdd9f6a25f445b0dd6"
+    },
+    {
+      "path": "licenses/pygame-ce/dependencies/LICENSE.numpy.txt",
+      "source_url": "https://raw.githubusercontent.com/pygame-community/pygame-ce/2895f7aed85ca8fdff2704c42b286cefcf6a6344/docs/licenses/LICENSE.numpy.txt",
+      "source_commit": "2895f7aed85ca8fdff2704c42b286cefcf6a6344",
+      "upstream_git_blob_sha1": "8ce64521862e44a1a147025270a3ee799e865d7e",
+      "upstream_bytes": 1543,
+      "upstream_sha256": "faaa516b85dbf609b0296918d61924e3145c9d2b8d91ea5be93e7ba073a78aa1",
+      "bytes": 1543,
+      "sha256": "faaa516b85dbf609b0296918d61924e3145c9d2b8d91ea5be93e7ba073a78aa1"
+    },
+    {
+      "path": "licenses/pygame-ce/dependencies/LICENSE.ogg-vorbis.txt",
+      "source_url": "https://raw.githubusercontent.com/pygame-community/pygame-ce/2895f7aed85ca8fdff2704c42b286cefcf6a6344/docs/licenses/LICENSE.ogg-vorbis.txt",
+      "source_commit": "2895f7aed85ca8fdff2704c42b286cefcf6a6344",
+      "upstream_git_blob_sha1": "5b966606d90882655f6e5b25ad52533f3f83294b",
+      "upstream_bytes": 1498,
+      "upstream_sha256": "776b6f6ab87afa263d534ad4061b6180149de0fed90e2e18e1592992922327ce",
+      "bytes": 1498,
+      "sha256": "776b6f6ab87afa263d534ad4061b6180149de0fed90e2e18e1592992922327ce"
+    },
+    {
+      "path": "licenses/pygame-ce/dependencies/LICENSE.opus.txt",
+      "source_url": "https://raw.githubusercontent.com/pygame-community/pygame-ce/2895f7aed85ca8fdff2704c42b286cefcf6a6344/docs/licenses/LICENSE.opus.txt",
+      "source_commit": "2895f7aed85ca8fdff2704c42b286cefcf6a6344",
+      "upstream_git_blob_sha1": "fb6f3e4001c4b1f760966f061b6225c8e30b0628",
+      "upstream_bytes": 1972,
+      "upstream_sha256": "fde149f902d124a8c02a218527c440ee2fab6884323f180061b1405fb06af60e",
+      "bytes": 1972,
+      "sha256": "fde149f902d124a8c02a218527c440ee2fab6884323f180061b1405fb06af60e"
+    },
+    {
+      "path": "licenses/pygame-ce/dependencies/LICENSE.opusfile.txt",
+      "source_url": "https://raw.githubusercontent.com/pygame-community/pygame-ce/2895f7aed85ca8fdff2704c42b286cefcf6a6344/docs/licenses/LICENSE.opusfile.txt",
+      "source_commit": "2895f7aed85ca8fdff2704c42b286cefcf6a6344",
+      "upstream_git_blob_sha1": "d7461f157963a11e37dde7ac3a87ce36a6de3796",
+      "upstream_bytes": 1515,
+      "upstream_sha256": "54e125c8250361407b34322e0f328f6bdf7fd30cd4f2941a321e47b41f9c159d",
+      "bytes": 1515,
+      "sha256": "54e125c8250361407b34322e0f328f6bdf7fd30cd4f2941a321e47b41f9c159d"
+    },
+    {
+      "path": "licenses/pygame-ce/dependencies/LICENSE.png.txt",
+      "source_url": "https://raw.githubusercontent.com/pygame-community/pygame-ce/2895f7aed85ca8fdff2704c42b286cefcf6a6344/docs/licenses/LICENSE.png.txt",
+      "source_commit": "2895f7aed85ca8fdff2704c42b286cefcf6a6344",
+      "upstream_git_blob_sha1": "10075901f16aa70c0a5d56a0b69fa4343f947e3e",
+      "upstream_bytes": 5479,
+      "upstream_sha256": "0ad3bfee8be10e5519949e7af492e36bc349376b75fbeb412229a5967e3e9434",
+      "bytes": 5479,
+      "sha256": "0ad3bfee8be10e5519949e7af492e36bc349376b75fbeb412229a5967e3e9434"
+    },
+    {
+      "path": "licenses/pygame-ce/dependencies/LICENSE.portmidi.txt",
+      "source_url": "https://raw.githubusercontent.com/pygame-community/pygame-ce/2895f7aed85ca8fdff2704c42b286cefcf6a6344/docs/licenses/LICENSE.portmidi.txt",
+      "source_commit": "2895f7aed85ca8fdff2704c42b286cefcf6a6344",
+      "upstream_git_blob_sha1": "b7c9ed18598ab25b0c3325d5cfa0496bb0207f4d",
+      "upstream_bytes": 11342,
+      "upstream_sha256": "eb5d0724b2ae76a94ae804c44b3d6cfaaca822b7d42907aefa9256cb93db6fe0",
+      "bytes": 11342,
+      "sha256": "eb5d0724b2ae76a94ae804c44b3d6cfaaca822b7d42907aefa9256cb93db6fe0"
+    },
+    {
+      "path": "licenses/pygame-ce/dependencies/LICENSE.sdl2.txt",
+      "source_url": "https://raw.githubusercontent.com/pygame-community/pygame-ce/2895f7aed85ca8fdff2704c42b286cefcf6a6344/docs/licenses/LICENSE.sdl2.txt",
+      "source_commit": "2895f7aed85ca8fdff2704c42b286cefcf6a6344",
+      "upstream_git_blob_sha1": "f158cb42e5fb8039fc85f76b7c6d6194bd3b2a40",
+      "upstream_bytes": 930,
+      "upstream_sha256": "ae4df3759a726538607b84c00ab8f8a5567d9f38ad5397486eb9b5c5f626caef",
+      "bytes": 930,
+      "sha256": "ae4df3759a726538607b84c00ab8f8a5567d9f38ad5397486eb9b5c5f626caef"
+    },
+    {
+      "path": "licenses/pygame-ce/dependencies/LICENSE.sdl2_image.txt",
+      "source_url": "https://raw.githubusercontent.com/pygame-community/pygame-ce/2895f7aed85ca8fdff2704c42b286cefcf6a6344/docs/licenses/LICENSE.sdl2_image.txt",
+      "source_commit": "2895f7aed85ca8fdff2704c42b286cefcf6a6344",
+      "upstream_git_blob_sha1": "d7690d77c3d3d06896490a5105e1b171d3ef14f2",
+      "upstream_bytes": 996,
+      "upstream_sha256": "45079362e2230154205413a6940544ca94e3479ccf76205c71c4f542a6815d25",
+      "bytes": 996,
+      "sha256": "45079362e2230154205413a6940544ca94e3479ccf76205c71c4f542a6815d25"
+    },
+    {
+      "path": "licenses/pygame-ce/dependencies/LICENSE.sdl2_mixer.txt",
+      "source_url": "https://raw.githubusercontent.com/pygame-community/pygame-ce/2895f7aed85ca8fdff2704c42b286cefcf6a6344/docs/licenses/LICENSE.sdl2_mixer.txt",
+      "source_commit": "2895f7aed85ca8fdff2704c42b286cefcf6a6344",
+      "upstream_git_blob_sha1": "c59f77f5d2f27596c80b8935f1825d9809f3021e",
+      "upstream_bytes": 994,
+      "upstream_sha256": "113727180e7956cb9718b03b41da85b63ea54743a33047071a623bf672895a10",
+      "bytes": 994,
+      "sha256": "113727180e7956cb9718b03b41da85b63ea54743a33047071a623bf672895a10"
+    },
+    {
+      "path": "licenses/pygame-ce/dependencies/LICENSE.sdl_gfx.txt",
+      "source_url": "https://raw.githubusercontent.com/pygame-community/pygame-ce/2895f7aed85ca8fdff2704c42b286cefcf6a6344/docs/licenses/LICENSE.sdl_gfx.txt",
+      "source_commit": "2895f7aed85ca8fdff2704c42b286cefcf6a6344",
+      "upstream_git_blob_sha1": "a3bdae225be9f13a04b8737a9e82cc87d266232f",
+      "upstream_bytes": 191,
+      "upstream_sha256": "63744690fa28ecf2a9dedacafb08d1209031e7eff1820430d952264f678a1bcf",
+      "bytes": 191,
+      "sha256": "63744690fa28ecf2a9dedacafb08d1209031e7eff1820430d952264f678a1bcf"
+    },
+    {
+      "path": "licenses/pygame-ce/dependencies/LICENSE.sse2neon-h.txt",
+      "source_url": "https://raw.githubusercontent.com/pygame-community/pygame-ce/2895f7aed85ca8fdff2704c42b286cefcf6a6344/docs/licenses/LICENSE.sse2neon-h.txt",
+      "source_commit": "2895f7aed85ca8fdff2704c42b286cefcf6a6344",
+      "upstream_git_blob_sha1": "64f704bafde0d3e2331776f1eac1556f0c5b2ba9",
+      "upstream_bytes": 1832,
+      "upstream_sha256": "ada11c843d252c0b70837629ac7a54a525ecb7d8c0932ebccf863c55dbd32cb1",
+      "bytes": 1832,
+      "sha256": "ada11c843d252c0b70837629ac7a54a525ecb7d8c0932ebccf863c55dbd32cb1"
+    },
+    {
+      "path": "licenses/pygame-ce/dependencies/LICENSE.tiff.txt",
+      "source_url": "https://raw.githubusercontent.com/pygame-community/pygame-ce/2895f7aed85ca8fdff2704c42b286cefcf6a6344/docs/licenses/LICENSE.tiff.txt",
+      "source_commit": "2895f7aed85ca8fdff2704c42b286cefcf6a6344",
+      "upstream_git_blob_sha1": "c330e072cf1adad1e14a72ae37222df98c1a4e74",
+      "upstream_bytes": 1160,
+      "upstream_sha256": "8eeab3915f97f6f7b62a8008bf77e7ac3bfbb034b04d93cd63aafa10b2dd6614",
+      "bytes": 1160,
+      "sha256": "8eeab3915f97f6f7b62a8008bf77e7ac3bfbb034b04d93cd63aafa10b2dd6614"
+    },
+    {
+      "path": "licenses/pygame-ce/dependencies/LICENSE.webp.txt",
+      "source_url": "https://raw.githubusercontent.com/pygame-community/pygame-ce/2895f7aed85ca8fdff2704c42b286cefcf6a6344/docs/licenses/LICENSE.webp.txt",
+      "source_commit": "2895f7aed85ca8fdff2704c42b286cefcf6a6344",
+      "upstream_git_blob_sha1": "947fb3e48f0b50082130b9d99f331e2c2893608e",
+      "upstream_bytes": 1526,
+      "upstream_sha256": "17c029a902ad45a199dfe8e3a1c39305ab28d302b0703360c4a27351a4673dcb",
+      "bytes": 1526,
+      "sha256": "17c029a902ad45a199dfe8e3a1c39305ab28d302b0703360c4a27351a4673dcb"
+    },
+    {
+      "path": "licenses/pygame-ce/dependencies/LICENSE.zlib.txt",
+      "source_url": "https://raw.githubusercontent.com/pygame-community/pygame-ce/2895f7aed85ca8fdff2704c42b286cefcf6a6344/docs/licenses/LICENSE.zlib.txt",
+      "source_commit": "2895f7aed85ca8fdff2704c42b286cefcf6a6344",
+      "upstream_git_blob_sha1": "cd3b26f3efe58fb9a040ad0f9c1d7205bbceef00",
+      "upstream_bytes": 1562,
+      "upstream_sha256": "31010e0bc26df3001c7bb3c1b7a7094a8972bf6d37a5d0c59d3d3c98fbfaf463",
+      "bytes": 1562,
+      "sha256": "31010e0bc26df3001c7bb3c1b7a7094a8972bf6d37a5d0c59d3d3c98fbfaf463"
+    },
+    {
+      "path": "licenses/xterm-LICENSE.txt",
+      "source_url": "https://raw.githubusercontent.com/xtermjs/xterm.js/d8a8247dbc110ee6a963359439a5324cb36ecf47/LICENSE",
+      "source_commit": "d8a8247dbc110ee6a963359439a5324cb36ecf47",
+      "upstream_git_blob_sha1": "4472336c9f3dee53c82f951cff3d9ddbadc65614",
+      "upstream_bytes": 1261,
+      "upstream_sha256": "b569f629d00f2626a8100df2a1798210535621e42164dfd426a6fe5aac7b0ccd",
+      "bytes": 1261,
+      "sha256": "b569f629d00f2626a8100df2a1798210535621e42164dfd426a6fe5aac7b0ccd"
+    },
+    {
+      "path": "vt/xterm-addon-image.js",
+      "source_url": "https://raw.githubusercontent.com/pygame-web/cdn/3aa22420805e9b1603a6b950ffae45d6560fac09/vt/xterm-addon-image.js",
+      "source_commit": "3aa22420805e9b1603a6b950ffae45d6560fac09",
+      "upstream_git_blob_sha1": "6d94547657c5dd9c685de2801bb57f35415b8629",
+      "upstream_bytes": 54544,
+      "upstream_sha256": "a4795cf0998c595de120f79a69c6e522db5fff28dba7c50c1e872ea81a89fd81",
+      "bytes": 54544,
+      "sha256": "a4795cf0998c595de120f79a69c6e522db5fff28dba7c50c1e872ea81a89fd81"
+    },
+    {
+      "path": "vt/xterm.css",
+      "source_url": "https://raw.githubusercontent.com/pygame-web/cdn/3aa22420805e9b1603a6b950ffae45d6560fac09/vt/xterm.css",
+      "source_commit": "3aa22420805e9b1603a6b950ffae45d6560fac09",
+      "upstream_git_blob_sha1": "74acc26708829de31d158bf08ce690d811590b8e",
+      "upstream_bytes": 5383,
+      "upstream_sha256": "832f3f2c603b43ad4351ff04970150cc7a873014276db126a6065c6dd81e4872",
+      "bytes": 5383,
+      "sha256": "832f3f2c603b43ad4351ff04970150cc7a873014276db126a6065c6dd81e4872"
+    },
+    {
+      "path": "vt/xterm.js",
+      "source_url": "https://raw.githubusercontent.com/pygame-web/cdn/3aa22420805e9b1603a6b950ffae45d6560fac09/vt/xterm.js",
+      "source_commit": "3aa22420805e9b1603a6b950ffae45d6560fac09",
+      "upstream_git_blob_sha1": "a68eae6ce1ca32f17fc7150b2dffa628d7b71099",
+      "upstream_bytes": 283404,
+      "upstream_sha256": "f0aea0f75f48559013ae6643c2479dd737d26da42d5524e6d2b70915ae6523c7",
+      "bytes": 283404,
+      "sha256": "f0aea0f75f48559013ae6643c2479dd737d26da42d5524e6d2b70915ae6523c7"
+    },
+    {
+      "path": "vtx.js",
+      "source_url": "https://raw.githubusercontent.com/pygame-web/cdn/3aa22420805e9b1603a6b950ffae45d6560fac09/vtx.js",
+      "source_commit": "3aa22420805e9b1603a6b950ffae45d6560fac09",
+      "upstream_git_blob_sha1": "4ea20362a204d01207bd643f1c968a9cd58f14c6",
+      "upstream_bytes": 9887,
+      "upstream_sha256": "9c5f4de60a85dad9093862715094d67d9c8065872657ad3effa1a6cac6834797",
+      "bytes": 9887,
+      "sha256": "9c5f4de60a85dad9093862715094d67d9c8065872657ad3effa1a6cac6834797"
+    }
+  ]
+}

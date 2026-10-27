@@ -1,0 +1,4 @@
+{
+  "-CDN-": "./runtime/",
+  "pygame": "cp312/pygame_ce-2.5.7-<abi>-<abi>-<api>.whl"
+}

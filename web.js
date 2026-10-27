@@ -47,13 +47,134 @@ document.getElementById('fullscreen-button').addEventListener('click',async()=>{
   canvas.focus({preventScroll:true});fitGame();
 });
 document.addEventListener('fullscreenchange',()=>{document.getElementById('fullscreen-button').textContent=document.fullscreenElement?'退出全屏':'全屏';fitGame();});
-const launch=document.getElementById('launch-button');let launched=false;
-launch.addEventListener('click',()=>{launched=true;launch.disabled=true;launch.textContent='正在进入…';canvas.focus({preventScroll:true});});
+const launch=document.getElementById('launch-button');let launched=false,launchedAt=0;
+launch.addEventListener('click',()=>{launched=true;launchedAt=performance.now();launch.disabled=true;launch.textContent='正在进入…';canvas.focus({preventScroll:true});});
 const start=performance.now();
+const loadPanel=document.getElementById('load-panel');
+const loadHint=document.getElementById('load-hint');
+const loadInfo=document.getElementById('infobox');
+const retry=document.getElementById('retry-link');
+const stages={runtime:'正在加载运行环境',resources:'正在下载游戏资源',preload:'正在准备游戏资源',ready:'准备好了，点击下方按钮进入',assets:'正在准备游戏画面',starting:'正在启动游戏'};
+const stageOrder=['runtime','resources','preload','ready','assets','starting'];
+let observedStage='runtime',previousStage='',lastActivity=start,failure=null,resourceObserver=null;
+loadHint.setAttribute('role','status');loadHint.setAttribute('aria-live','polite');
+
+function startupResource(value){
+  try{
+    const url=new URL(typeof value==='string'?value:value.url,document.baseURI);
+    const path=url.pathname.toLowerCase();
+    const name=path.split('/').pop();
+    if(/\.(tar\.gz|apk)$/.test(path))return {stage:'resources',name,url:url.href};
+    if(/\.(wasm|data|whl)$/.test(path)||/(pythons|browserfs|cpython|pythonrc|vtx|vt\.js|index-0\.9\.3)/.test(path))return {stage:'runtime',name,url:url.href};
+  }catch{}
+  return null;
+}
+
+function currentLoadStage(){
+  if(window.nightSurvivorsRuntimeReady&&!launched)return 'ready';
+  const explicit=window.nightSurvivorsLoadStage;
+  if(launched&&(!explicit||explicit==='ready'))return 'assets';
+  return stageOrder.includes(explicit)?explicit:observedStage;
+}
+
+function reportLoadError(stage,detail){
+  if(window.nightSurvivorsReady)return;
+  const text=String(detail?.message||detail||'');
+  failure={stage:stageOrder.includes(stage)?stage:currentLoadStage(),detail:text.slice(0,300)};
+  renderLoading();
+}
+window.nightSurvivorsReportLoadError=reportLoadError;
+for(const item of window.nightSurvivorsLoadErrors||[])reportLoadError(item.stage,item.detail);
+window.nightSurvivorsLoadErrors=[];
+
+function noteResource(resource,status=0){
+  if(!resource||window.nightSurvivorsReady)return;
+  observedStage=resource.stage;lastActivity=performance.now();
+  if(status>=400)reportLoadError(resource.stage,`${resource.name} HTTP ${status}`);
+  else if(status>=200&&status<400&&failure?.detail.includes(resource.name))failure=null;
+}
+
+// Observe failures without consuming response bodies or changing fetch options.
+// This also catches WASM/data fetches which do not dispatch a script error event.
+const originalFetch=window.fetch;
+if(originalFetch)window.fetch=function(input,init){
+  const resource=startupResource(input);
+  const request=originalFetch.call(this,input,init);
+  if(!resource)return request;
+  observedStage=resource.stage;
+  return request.then(response=>{noteResource(resource,response.status);return response;},error=>{
+    if(error?.name!=='AbortError')reportLoadError(resource.stage,`${resource.name}: ${error?.message||'network error'}`);
+    throw error;
+  });
+};
+
+// Buffered entries cover requests which finished before this deferred script ran.
+if(window.PerformanceObserver){
+  try{
+    resourceObserver=new PerformanceObserver(list=>{
+      for(const entry of list.getEntries())noteResource(startupResource(entry.name),entry.responseStatus||0);
+    });
+    resourceObserver.observe({type:'resource',buffered:true});
+  }catch{}
+}
+window.addEventListener('error',event=>{
+  if(window.nightSurvivorsReady)return;
+  const source=event.target?.src||event.filename;
+  const resource=source&&startupResource(source);
+  if(resource)reportLoadError(resource.stage,`${resource.name}: ${event.message||'script load error'}`);
+  else if(event.target?.tagName==='SCRIPT')reportLoadError('runtime','script load error');
+  else if(/WebAssembly|wasm|CompileError|LinkError/i.test(event.message||''))reportLoadError('runtime',event.message);
+},true);
+window.addEventListener('unhandledrejection',event=>{
+  if(window.nightSurvivorsReady)return;
+  const reason=event.reason;
+  if(reason?.name==='AbortError')return;
+  if(reason?.name==='NotAllowedError'&&/play|audio|media|gesture/i.test(reason.message||''))return;
+  reportLoadError(currentLoadStage(),reason?.message||reason);
+});
+
+function renderLoading(){
+  if(window.nightSurvivorsReady){
+    document.body.dataset.ready='true';loadPanel.hidden=true;
+    failure=null;retry.hidden=true;delete loadPanel.dataset.loadState;
+    window.nightSurvivorsLoadDiagnostic={stage:'complete',elapsedSeconds:Math.floor((performance.now()-start)/1000),slow:false,error:null};
+    return true;
+  }
+  const stage=currentLoadStage();
+  if(stage!==previousStage){
+    lastActivity=performance.now();previousStage=stage;
+    if(failure&&stageOrder.indexOf(stage)>stageOrder.indexOf(failure.stage))failure=null;
+  }
+  const seconds=Math.floor((performance.now()-(launched?launchedAt:start))/1000);
+  const waitingForClick=stage==='ready'&&!launched;
+  const slow=!waitingForClick&&(performance.now()-lastActivity>30000||seconds>=60);
+  if(waitingForClick){
+    failure=null;launch.disabled=false;launch.textContent='进入游戏';
+  }else if(!launched){
+    launch.disabled=true;launch.textContent=stage==='runtime'?'正在加载运行环境…':'正在准备资源…';
+  }
+  const infoText=stages[stage]+(waitingForClick?'':`… 已等待 ${seconds} 秒`);
+  if(loadInfo.textContent!==infoText)loadInfo.textContent=infoText;
+  retry.hidden=!(failure||slow);
+  loadPanel.dataset.loadState=failure?'error':slow?'slow':'loading';
+  let hintText;
+  if(failure){
+    const section=failure.stage==='runtime'?'运行环境':'游戏资源';
+    hintText=`${section}加载遇到问题，可重新加载。若资源随后加载成功，页面会自动恢复。`;
+  }else if(slow){
+    const section=stage==='runtime'?'运行环境':'游戏资源';
+    hintText=`${section}仍在准备，可能是网络较慢。可继续等待，或点击下方重新加载。`;
+  }else{
+    hintText=waitingForClick?'点击进入即可开始，首次加载的资源已准备好。':'首次进入需要下载运行环境和游戏资源，请保持页面打开。';
+  }
+  if(loadHint.textContent!==hintText)loadHint.textContent=hintText;
+  window.nightSurvivorsLoadDiagnostic={stage,elapsedSeconds:seconds,slow,error:failure?.detail||null};
+  return false;
+}
+renderLoading();
 const readyTimer=setInterval(()=>{
-  if(window.nightSurvivorsReady){document.body.dataset.ready='true';document.getElementById('load-panel').hidden=true;clearInterval(readyTimer);fitGame();canvas.focus({preventScroll:true});return;}
-  if(window.nightSurvivorsRuntimeReady&&!launched){launch.disabled=false;launch.textContent='进入游戏';document.getElementById('infobox').textContent='准备好了，点击下方按钮进入';}
-  if(launched){document.getElementById('infobox').textContent='正在准备游戏画面…';}
-  if(performance.now()-start>30000){document.getElementById('load-hint').textContent='加载较慢，请保持网络连接。若一直无法进入，可重新加载。';document.getElementById('retry-link').hidden=false;}
-},120);
-window.addEventListener('error',e=>{if(!window.nightSurvivorsReady&&e.target?.tagName==='SCRIPT'){document.getElementById('load-hint').textContent='游戏资源加载失败，请检查网络后重试。';document.getElementById('retry-link').hidden=false;}},true);
+  if(renderLoading()){
+    clearInterval(readyTimer);resourceObserver?.disconnect();
+    fitGame();canvas.focus({preventScroll:true});
+  }
+},250);
